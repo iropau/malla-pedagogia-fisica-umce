@@ -1,45 +1,137 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Pedagogía en Física</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malla Interactiva de la Carrera</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 20px; }
-    .semestre { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .asignatura { margin: 5px 0; padding: 5px; border-left: 4px solid #007acc; }
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .semester {
+      margin-bottom: 3rem;
+    }
+    .semester h2 {
+      background: #004466;
+      color: white;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+    }
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .course {
+      background: white;
+      border-radius: 0.5rem;
+      border: 2px solid #ccc;
+      padding: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .course.completed {
+      background: #c8f7c5;
+      border-color: #2ecc71;
+    }
+    .course.locked {
+      background: #eee;
+      border-color: #aaa;
+      color: #999;
+      pointer-events: none;
+    }
+    .credits {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 0.5rem;
+    }
   </style>
 </head>
 <body>
-  <h1>Malla Interactiva Pedagogía en Física UMCE</h1>
+  <h1>Malla Interactiva - Pedagogía en Física</h1>
+  <div id="malla"></div>
 
-  <div class="semestre">
-    <h2>1er Semestre</h2>
-    <div class="asignatura">Física</div>
-    <div class="asignatura">Química</div>
-    <div class="asignatura">Biología</div>
-    <div class="asignatura">Matemática</div>
-    <div class="asignatura">Fortalecimiento de Habilidades de Entrada</div>
-    <div class="asignatura">Pedagogía e Identidad Profesional Docente</div>
-  </div>
+  <script>
+    const ramos = [
+      { id: '1.1', nombre: 'Fortalecimiento de Habilidades de Entrada', semestre: 1, creditos: 3, prereqs: [] },
+      { id: '1.2', nombre: 'Pedagogía e Identidad Profesional Docente', semestre: 1, creditos: 4, prereqs: [] },
+      { id: '1.3', nombre: 'Biología', semestre: 1, creditos: 5, prereqs: [] },
+      { id: '1.4', nombre: 'Matemática', semestre: 1, creditos: 6, prereqs: [] },
+      { id: '1.5', nombre: 'Física', semestre: 1, creditos: 6, prereqs: [] },
+      { id: '1.6', nombre: 'Química', semestre: 1, creditos: 6, prereqs: [] },
 
-  <div class="semestre">
-    <h2>2do Semestre</h2>
-    <div class="asignatura">Práctica I</div>
-    <div class="asignatura">Informática Aplicada</div>
-    <div class="asignatura">Mecánica</div>
-    <div class="asignatura">Métodos Matemáticos para la Física</div>
-    <div class="asignatura">Física Experimental I</div>
-    <div class="asignatura">Filosofía y Sociología de la Educación</div>
-  </div>
+      { id: '2.1', nombre: 'Práctica I: Observación', semestre: 2, creditos: 5, prereqs: [] },
+      { id: '2.2', nombre: 'Sociología y Psicología', semestre: 2, creditos: 5, prereqs: ['1.1', '1.2'] },
+      { id: '2.3', nombre: 'Informática Aplicada', semestre: 2, creditos: 3, prereqs: [] },
+      { id: '2.4', nombre: 'Métodos Matemáticos I', semestre: 2, creditos: 5, prereqs: ['1.4', '1.5'] },
+      { id: '2.5', nombre: 'Mecánica', semestre: 2, creditos: 6, prereqs: ['1.5'] },
+      { id: '2.6', nombre: 'Física Experimental I', semestre: 2, creditos: 6, prereqs: ['1.4', '1.5'] },
 
-  <div class="semestre">
-    <h2>3er Semestre</h2>
-    <div class="asignatura">Práctica I</div>
-    <div class="asignatura">Informática Aplicada</div>
-    <div class="asignatura">Mecánica</div>
-    <div class="asignatura">Métodos Matemáticos para la Física</div>
-    <div class="asignatura">Física Experimental I</div>
-    <div class="asignatura">Filosofía y Sociología de la Educación</div>
+      // Agrega todos los ramos siguientes aquí...
 
+    ];
+
+    const state = {};
+    const container = document.getElementById('malla');
+
+    function createMalla() {
+      const semestres = [...new Set(ramos.map(r => r.semestre))];
+
+      semestres.forEach(sem => {
+        const semDiv = document.createElement('div');
+        semDiv.className = 'semester';
+        semDiv.innerHTML = `<h2>Semestre ${sem}</h2>`;
+
+        const grid = document.createElement('div');
+        grid.className = 'course-grid';
+
+        ramos.filter(r => r.semestre === sem).forEach(r => {
+          const card = document.createElement('div');
+          card.className = 'course locked';
+          card.id = r.id;
+          card.innerHTML = `
+            <strong>${r.nombre}</strong>
+            <div class="credits">${r.creditos} créditos</div>
+          `;
+          card.addEventListener('click', () => toggleRamo(r.id));
+          grid.appendChild(card);
+        });
+
+        semDiv.appendChild(grid);
+        container.appendChild(semDiv);
+      });
+
+      updateUI();
+    }
+
+    function toggleRamo(id) {
+      state[id] = !state[id];
+      updateUI();
+    }
+
+    function updateUI() {
+      ramos.forEach(r => {
+        const card = document.getElementById(r.id);
+        const passed = state[r.id];
+        const unlocked = r.prereqs.every(pr => state[pr]);
+
+        card.classList.remove('completed', 'locked');
+        if (passed) {
+          card.classList.add('completed');
+        } else if (!unlocked && r.prereqs.length > 0) {
+          card.classList.add('locked');
+        }
+      });
+    }
+
+    window.onload = createMalla;
+  </script>
 </body>
 </html>
