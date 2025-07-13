@@ -1,0 +1,87 @@
+body {
+  font-family: sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 2rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #004466;
+}
+
+.malla-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.semester {
+  margin-bottom: 3rem;
+  background: #f9f9f9;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.semester h2 {
+  background: #004466;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.course {
+  background: white;
+  border-radius: 0.5rem;
+  border: 2px solid #ccc;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.course:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.course.completed {
+  background: #FFF9C4; /* Amarillo mostaza claro */
+  border-color: #FFD54F; /* Amarillo mostaza */
+  color: #333;
+}
+
+.course.locked {
+  background: #E0F7FA; /* Celeste claro */
+  border-color: #80DEEA; /* Celeste */
+  color: #555;
+  pointer-events: none;
+}
+
+.credits {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Estilos para semestres pares e impares */
+.semester:nth-child(odd) {
+  background: #E3F2FD; /* Celeste muy claro para semestres impares */
+}
+
+.semester:nth-child(even) {
+  background: #FFFDE7; /* Amarillo muy claro para semestres pares */
+}
