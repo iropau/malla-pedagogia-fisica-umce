@@ -6,7 +6,7 @@ const ramos = [
   { id: '1.5', nombre: 'Física', semestre: 1, creditos: 6, prereqs: [] },
   { id: '1.6', nombre: 'Química', semestre: 1, creditos: 6, prereqs: [] },
 
-  { id: '2.1', nombre: 'Práctica I: Observación', semestre: 2, creditos: 5, prereqs: [] },
+  { id: '2.1', nombre: 'Práctica I', semestre: 2, creditos: 5, prereqs: [] },
   { id: '2.2', nombre: 'Sociología y Psicología de la Educación', semestre: 2, creditos: 5, prereqs: ['1.1', '1.2'] },
   { id: '2.3', nombre: 'Informática Aplicada', semestre: 2, creditos: 3, prereqs: [] },
   { id: '2.4', nombre: 'Métodos Matemáticos de la Física I', semestre: 2, creditos: 5, prereqs: ['1.4', '1.5'] },
