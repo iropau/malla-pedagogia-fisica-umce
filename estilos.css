@@ -9,10 +9,10 @@ body {
 h1 {
   text-align: center;
   margin-bottom: 2rem;
-  color: #004466;
+  color: #0a2d4a; /* Azul oscuro */
 }
 
-/* Contenedor principal - Scroll horizontal */
+/* Contenedor principal */
 .malla-container {
   display: flex;
   flex-direction: row;
@@ -26,11 +26,20 @@ h1 {
   scrollbar-width: thin;
 }
 
-/* Semestres - Tarjetas en línea */
+/* Barra de scroll */
+.malla-container::-webkit-scrollbar {
+  height: 8px;
+}
+.malla-container::-webkit-scrollbar-thumb {
+  background: #0a2d4a; /* Azul oscuro */
+  border-radius: 4px;
+}
+
+/* Semestres */
 .semester {
   display: inline-block;
   width: 300px;
-  background: #f9f9f9;
+  background: #f8f9fa; /* Gris muy claro */
   border-radius: 0.8rem;
   padding: 1rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -39,7 +48,7 @@ h1 {
 }
 
 .semester h2 {
-  background: #004466;
+  background: #0a2d4a; /* Azul oscuro */
   color: white;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -47,16 +56,11 @@ h1 {
   margin-top: 0;
 }
 
-.course-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
+/* Cursos */
 .course {
-  background: white;
+  background: #e9ecef; /* Gris claro */
   border-radius: 0.5rem;
-  border: 2px solid #ccc;
+  border: 2px solid #ced4da; /* Gris medio */
   padding: 1rem;
   cursor: pointer;
   transition: all 0.2s;
@@ -67,45 +71,38 @@ h1 {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* Curso completado */
 .course.completed {
-  background: #FFF9C4;
-  border-color: #FFD54F;
+  background: #ffd166; /* Amarillo mostaza */
+  border-color: #ffb700; /* Amarillo mostaza oscuro */
   color: #333;
 }
 
+/* Curso bloqueado */
 .course.locked {
-  background: #E0F7FA;
-  border-color: #80DEEA;
-  color: #555;
+  background: #e9ecef; /* Gris claro */
+  border-color: #ced4da; /* Gris medio */
+  color: #6c757d; /* Gris oscuro */
   pointer-events: none;
 }
 
 .credits {
   font-size: 0.85rem;
-  color: #555;
+  color: #495057; /* Gris oscuro */
   margin-top: 0.5rem;
   font-style: italic;
 }
 
 /* Colores alternos para semestres */
 .semester:nth-child(odd) {
-  background: #E3F2FD;
+  background: #e6f2ff; /* Azul muy claro */
 }
 
 .semester:nth-child(even) {
-  background: #FFFDE7;
+  background: #fff3cd; /* Amarillo claro */
 }
 
-/* Barra de scroll personalizada */
-.malla-container::-webkit-scrollbar {
-  height: 8px;
-}
-.malla-container::-webkit-scrollbar-thumb {
-  background: #004466;
-  border-radius: 4px;
-}
-
-/* Responsivo para móviles */
+/* Responsivo */
 @media (max-width: 768px) {
   .semester {
     width: 280px;
