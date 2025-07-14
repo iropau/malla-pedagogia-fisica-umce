@@ -159,16 +159,23 @@ function updateUI() {
   });
 }
 
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (confirm('¿Borrar todo tu progreso?')) {
+    localStorage.removeItem('mallaState');
+    state = {};
+    updateUI();
+  }
+});
+
+// Finalmente, la carga inicial
 window.onload = function() {
-  // Cargar estado guardado
   const savedState = localStorage.getItem('mallaState');
   if (savedState) {
     Object.assign(state, JSON.parse(savedState));
   }
-  
   createMalla();
-  updateUI(); // Asegurar que la UI refleje el estado cargado
-};
+  updateUI();
+};;
 document.getElementById('resetBtn').addEventListener('click', () => {
   if (confirm('¿Estás seguro de querer borrar todo tu progreso?')) {
     localStorage.removeItem('mallaState'); // Borra los datos guardados
