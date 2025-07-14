@@ -2,7 +2,8 @@ body {
   font-family: sans-serif;
   background: #f4f4f4;
   margin: 0;
-  padding: 2rem;
+  padding: 1rem;
+  min-width: fit-content;
 }
 
 h1 {
@@ -11,22 +12,30 @@ h1 {
   color: #004466;
 }
 
+/* Contenedor principal - Scroll horizontal */
 .malla-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 1.5rem;
+  padding: 1rem;
+  align-items: flex-start;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
 
+/* Semestres - Tarjetas en línea */
 .semester {
-  margin-bottom: 3rem;
+  display: inline-block;
+  width: 300px;
   background: #f9f9f9;
   border-radius: 0.8rem;
   padding: 1rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  flex: 1;
-  min-width: 300px;
-  max-width: 400px;
+  flex-shrink: 0;
+  vertical-align: top;
 }
 
 .semester h2 {
@@ -35,6 +44,7 @@ h1 {
   padding: 0.5rem;
   border-radius: 0.5rem;
   text-align: center;
+  margin-top: 0;
 }
 
 .course-grid {
@@ -58,14 +68,14 @@ h1 {
 }
 
 .course.completed {
-  background: #FFF9C4; /* Amarillo mostaza claro */
-  border-color: #FFD54F; /* Amarillo mostaza */
+  background: #FFF9C4;
+  border-color: #FFD54F;
   color: #333;
 }
 
 .course.locked {
-  background: #E0F7FA; /* Celeste claro */
-  border-color: #80DEEA; /* Celeste */
+  background: #E0F7FA;
+  border-color: #80DEEA;
   color: #555;
   pointer-events: none;
 }
@@ -77,11 +87,30 @@ h1 {
   font-style: italic;
 }
 
-/* Estilos para semestres pares e impares */
+/* Colores alternos para semestres */
 .semester:nth-child(odd) {
-  background: #E3F2FD; /* Celeste muy claro para semestres impares */
+  background: #E3F2FD;
 }
 
 .semester:nth-child(even) {
-  background: #FFFDE7; /* Amarillo muy claro para semestres pares */
+  background: #FFFDE7;
+}
+
+/* Barra de scroll personalizada */
+.malla-container::-webkit-scrollbar {
+  height: 8px;
+}
+.malla-container::-webkit-scrollbar-thumb {
+  background: #004466;
+  border-radius: 4px;
+}
+
+/* Responsivo para móviles */
+@media (max-width: 768px) {
+  .semester {
+    width: 280px;
+  }
+  body {
+    padding: 1rem 0.5rem;
+  }
 }
