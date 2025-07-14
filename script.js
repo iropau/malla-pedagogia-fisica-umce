@@ -140,6 +140,8 @@ function toggleRamo(id) {
   // 3. Cambiar estado si pasó las validaciones
   state[id] = !state[id];
   updateUI();
+  // Nueva línea para guardar:
+  localStorage.setItem('mallaState', JSON.stringify(state));
 }
 
 function updateUI() {
@@ -157,4 +159,21 @@ function updateUI() {
   });
 }
 
-window.onload = createMalla;
+window.onload = function() {
+  // Cargar estado guardado
+  const savedState = localStorage.getItem('mallaState');
+  if (savedState) {
+    Object.assign(state, JSON.parse(savedState));
+  }
+  
+  createMalla();
+  updateUI(); // Asegurar que la UI refleje el estado cargado
+};
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (confirm('¿Estás seguro de querer borrar todo tu progreso?')) {
+    localStorage.removeItem('mallaState'); // Borra los datos guardados
+    state = {}; // Resetea el estado en memoria
+    updateUI(); // Actualiza la interfaz
+    alert('Progreso reiniciado correctamente');
+  }
+});
