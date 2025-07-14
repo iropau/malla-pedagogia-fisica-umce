@@ -105,6 +105,39 @@ function createMalla() {
 }
 
 function toggleRamo(id) {
+  const ramo = ramos.find(r => r.id === id);
+  
+  // 1. Validación de prerrequisitos
+  const prereqsFaltantes = ramo.prereqs.filter(pr => !state[pr]);
+  
+  if (prereqsFaltantes.length > 0 && !state[id]) {
+    // Mostrar nombres de ramos faltantes
+    const nombresFaltantes = prereqsFaltantes.map(id => {
+      const r = ramos.find(item => item.id === id);
+      return `${r.nombre} (${id})`;
+    }).join("\n• ");
+    
+    alert(`❌ No puedes tomar "${ramo.nombre}"\n\nFaltan estos prerrequisitos:\n• ${nombresFaltantes}`);
+    return;
+  }
+
+  // 2. Validación de deselección (si ya está completado)
+  if (state[id]) {
+    const ramosDependientes = ramos.filter(r => 
+      r.prereqs.includes(id) && state[r.id]
+    );
+    
+    if (ramosDependientes.length > 0) {
+      const nombresDependientes = ramosDependientes.map(r => 
+        `${r.nombre} (${r.id})`
+      ).join("\n• ");
+      
+      alert(`⚠️ No puedes deseleccionar "${ramo.nombre}"\n\nEs requisito de:\n• ${nombresDependientes}`);
+      return;
+    }
+  }
+
+  // 3. Cambiar estado si pasó las validaciones
   state[id] = !state[id];
   updateUI();
 }
