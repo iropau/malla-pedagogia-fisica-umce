@@ -1,113 +1,97 @@
 body {
   font-family: sans-serif;
-  background: #f4f4f4;
+  background: #f8f9fa; /* Fondo gris muy claro */
   margin: 0;
   padding: 1rem;
-  min-width: fit-content;
 }
 
 h1 {
   text-align: center;
   margin-bottom: 2rem;
-  color: #0a2d4a; /* Azul oscuro */
+  color: #1a237e; /* Azul oscuro intenso */
 }
 
-/* Contenedor principal */
+/* Contenedor principal - Scroll horizontal suave */
 .malla-container {
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  overflow-y: hidden;
   gap: 1.5rem;
-  padding: 1rem;
-  align-items: flex-start;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
+  padding: 1rem 0.5rem;
+  align-items: stretch; /* Altura uniforme */
   scrollbar-width: thin;
 }
 
-/* Barra de scroll */
-.malla-container::-webkit-scrollbar {
-  height: 8px;
-}
-.malla-container::-webkit-scrollbar-thumb {
-  background: #0a2d4a; /* Azul oscuro */
-  border-radius: 4px;
-}
-
-/* Semestres */
+/* Semestres - Diseño compacto */
 .semester {
-  display: inline-block;
-  width: 300px;
-  background: #f8f9fa; /* Gris muy claro */
-  border-radius: 0.8rem;
-  padding: 1rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  flex-shrink: 0;
-  vertical-align: top;
+  min-width: 300px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 1px solid #e0e0e0;
 }
 
+/* Títulos de semestre */
 .semester h2 {
-  background: #0a2d4a; /* Azul oscuro */
-  color: white;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
+  background: #1a237e; /* Azul oscuro */
+  color: #ffeb3b; /* Amarillo brillante */
+  padding: 0.75rem;
+  margin: 0;
+  border-radius: 8px 8px 0 0;
+  font-size: 1.1rem;
   text-align: center;
-  margin-top: 0;
+  position: sticky;
+  left: 0;
 }
 
 /* Cursos */
 .course {
-  background: #e9ecef; /* Gris claro */
-  border-radius: 0.5rem;
-  border: 2px solid #ced4da; /* Gris medio */
-  padding: 1rem;
-  cursor: pointer;
+  background: #f5f5f5; /* Gris muy claro */
+  border-left: 4px solid #1a237e; /* Borde azul */
+  margin: 1rem;
+  padding: 0.8rem;
+  border-radius: 4px;
   transition: all 0.2s;
 }
 
 .course:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* Curso completado */
+/* Estado completado */
 .course.completed {
-  background: #ffd166; /* Amarillo mostaza */
-  border-color: #ffb700; /* Amarillo mostaza oscuro */
-  color: #333;
+  background: #fff9c4; /* Amarillo claro */
+  border-left-color: #ffc107; /* Amarillo mostaza */
 }
 
-/* Curso bloqueado */
+/* Estado bloqueado */
 .course.locked {
-  background: #e9ecef; /* Gris claro */
-  border-color: #ced4da; /* Gris medio */
-  color: #6c757d; /* Gris oscuro */
-  pointer-events: none;
+  background: #eceff1; /* Gris azulado claro */
+  color: #90a4ae; /* Gris azulado */
+  border-left-color: #cfd8dc; /* Gris */
 }
 
 .credits {
-  font-size: 0.85rem;
-  color: #495057; /* Gris oscuro */
+  font-size: 0.8rem;
+  color: #546e7a; /* Gris azulado oscuro */
   margin-top: 0.5rem;
   font-style: italic;
 }
 
-/* Colores alternos para semestres */
-.semester:nth-child(odd) {
-  background: #e6f2ff; /* Azul muy claro */
+/* Barra de scroll */
+.malla-container::-webkit-scrollbar {
+  height: 6px;
+}
+.malla-container::-webkit-scrollbar-thumb {
+  background: #ffc107; /* Amarillo mostaza */
+  border-radius: 3px;
 }
 
-.semester:nth-child(even) {
-  background: #fff3cd; /* Amarillo claro */
-}
-
-/* Responsivo */
+/* Responsive */
 @media (max-width: 768px) {
   .semester {
-    width: 280px;
-  }
-  body {
-    padding: 1rem 0.5rem;
+    min-width: 280px;
   }
 }
